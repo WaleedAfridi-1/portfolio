@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
+@theme {
+  --color-bg-primary: var(--background);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-border-premium: var(--border-premium);
+  --color-accent-cyan: #0ea5e9;
+  --color-accent-purple: #8b5cf6;
+}
+
+/* Base Configuration */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* $1,000+ Dark Theme: Pure Cinematic Luxury Black */
+  --background: #020205;
+  --bg-secondary: #07070f;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-premium: rgba(255, 255, 255, 0.05);
+  --glow-opacity: 0.15;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.light {
+  /* $1,000+ Light Theme: Minimalist Art Gallery White */
+  --background: #fafafa;
+  --bg-secondary: #ffffff;
+  --text-main: #09090b;
+  --text-muted: #52525b;
+  --border-premium: rgba(9, 9, 11, 0.04);
+  --glow-opacity: 0.05;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  color: var(--text-main);
+  transition: background-color 0.7s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+}
+
+/* High-End Glassmorphism with Smooth Edge Highlight */
+.premium-glass {
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border-premium);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.light .premium-glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--border-premium);
+  box-shadow: 0 4px 30px rgba(9, 9, 11, 0.02);
+}
+
+/* Signature Typography Gradient */
+.text-luxury-gradient {
+  background: linear-gradient(135deg, var(--text-main) 30%, rgba(148, 163, 184, 0.5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtle Animated Mesh background effect */
+@keyframes mesh-move {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-mesh {
+  animation: mesh-move 10s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
 }
