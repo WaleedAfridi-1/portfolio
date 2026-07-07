@@ -6,20 +6,20 @@ const skillCategories = [
   {
     title: "Frontend Development",
     icon: Layout,
-    skills: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
-    level: 85,
+    skills: ["HTML5", "JavaScript", "Tailwind CSS"],
+    level: 80,
   },
   {
     title: "React & Next.js",
     icon: Cpu,
     skills: ["React", "Next.js"],
-    level: 80,
+    level: 78,
   },
   {
     title: "Backend Development",
     icon: Database,
     skills: ["Node.js", "Express.js", "MongoDB"],
-    level: 78,
+    level: 70,
   },
   {
     title: "Data Science",
