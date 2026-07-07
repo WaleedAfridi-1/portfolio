@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Download } from "lucide-react"; // Download icon add kiya
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
@@ -13,10 +13,17 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isHeroSection, setIsHeroSection] = useState(true); // Track karega ke user Hero page par hai ya nahi
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+      
+
+      setIsHeroSection(window.scrollY < 500);
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -59,6 +66,24 @@ export default function Navbar() {
           {/* Controls Capsule */}
           <div className="flex items-center gap-2">
             <ThemeToggle />
+            
+            {/* DESKTOP RESUME BUTTON (Sirf Hero Section mein dikhega) */}
+            <AnimatePresence>
+              {isHeroSection && (
+                <motion.a
+                  initial={{ opacity: 0, scale: 0.8, width: 0 }}
+                  animate={{ opacity: 1, scale: 1, width: "auto" }}
+                  exit={{ opacity: 0, scale: 0.8, width: 0 }}
+                  transition={{ duration: 0.3 }}
+                  href="/resume.pdf" 
+                  download="Waleed_Resume.pdf"
+                  className="flex items-center gap-2 text-xs font-bold border border-text-main/20 hover:border-text-main text-text-main hover:bg-text-main/5 px-5 py-3 rounded-full transition-all duration-300 tracking-wider uppercase font-mono overflow-hidden whitespace-nowrap packed-btn"
+                >
+                  Resume <Download className="w-3.5 h-3.5" />
+                </motion.a>
+              )}
+            </AnimatePresence>
+
             <a
               href="#contact"
               className="flex items-center gap-2 text-xs font-bold bg-text-main text-bg-primary hover:scale-[1.03] active:scale-[0.98] px-6 py-3 rounded-full transition-all duration-300 shadow-xl tracking-wider uppercase font-mono"
@@ -104,10 +129,28 @@ export default function Navbar() {
                   {link.name}
                 </motion.a>
               ))}
+
+              {/* MOBILE RESUME BUTTON (Sirf tab dikhega jab drawer open ho aur user Hero section par ho) */}
+              <AnimatePresence>
+                {isHeroSection && (
+                  <motion.a
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    href="/resume.pdf"
+                    download="Waleed_Resume.pdf"
+                    onClick={() => setIsOpen(false)}
+                    className="w-full text-center flex items-center justify-center gap-2 text-xs font-bold border border-text-main/20 text-text-main py-4 rounded-xl mt-2 tracking-widest uppercase font-mono overflow-hidden"
+                  >
+                    Download Resume <Download className="w-3.5 h-3.5" />
+                  </motion.a>
+                )}
+              </AnimatePresence>
+
               <a
                 href="#contact"
                 onClick={() => setIsOpen(false)}
-                className="w-full text-center text-xs font-bold bg-text-main text-bg-primary py-4 rounded-xl mt-4 tracking-widest uppercase font-mono"
+                className="w-full text-center text-xs font-bold bg-text-main text-bg-primary py-4 rounded-xl mt-2 tracking-widest uppercase font-mono"
               >
                 Get in Touch
               </a>
