@@ -13,8 +13,6 @@ const skillCategories = [
     title: "React & Next.js",
     icon: Cpu,
     skills: ["React", "Next.js"],
-
-    level: 70,
     level: 75,
   },
   {
