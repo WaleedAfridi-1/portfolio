@@ -4,7 +4,7 @@ import { Cpu, Database, Layout, BarChart3 } from "lucide-react";
 
 const skillCategories = [
   {
-    title: "Frontend Development",
+    title: "Frontend Development",  
     icon: Layout,
     skills: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"],
     level: 85,
@@ -13,7 +13,9 @@ const skillCategories = [
     title: "React & Next.js",
     icon: Cpu,
     skills: ["React", "Next.js"],
+
     level: 70,
+    level: 75,
   },
   {
     title: "Backend Development",
