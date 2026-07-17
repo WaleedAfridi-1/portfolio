@@ -13,13 +13,13 @@ const skillCategories = [
     title: "React & Next.js",
     icon: Cpu,
     skills: ["React", "Next.js"],
-    level: 80,
+    level: 70,
   },
   {
     title: "Backend Development",
     icon: Database,
     skills: ["Node.js", "Express.js", "MongoDB"],
-    level: 78,
+    level: 70,
   },
   {
     title: "Data Science",

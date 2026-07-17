@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight, Download } from "lucide-react"; // Download icon add kiya
+import { Menu, X, ArrowUpRight, Download } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
@@ -13,14 +13,12 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [isHeroSection, setIsHeroSection] = useState(true); // Track karega ke user Hero page par hai ya nahi
+  const [isHeroSection, setIsHeroSection] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
-      
-
       setIsHeroSection(window.scrollY < 500);
     };
 
@@ -33,8 +31,13 @@ export default function Navbar() {
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? "py-3" : "py-6"
+      // CHNAGES HERE: Mobile par backdrop blur lagaya aur scroll/open hone par solid background diya
+      className={`fixed top-0 w-full z-50 transition-all duration-500 backdrop-blur-md ${
+        isOpen 
+          ? "bg-bg-primary py-4 shadow-xl" // Mobile menu open ho to background solid aur clean ho jaye
+          : scrolled 
+            ? "bg-bg-primary/80 py-3 shadow-md" // Scroll hone par slight solid background with opacity
+            : "bg-transparent py-6"
       }`}
     >
       {/* Outer structural bounds */}
@@ -67,7 +70,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             <ThemeToggle />
             
-            {/* DESKTOP RESUME BUTTON (Sirf Hero Section mein dikhega) */}
+            {/* DESKTOP RESUME BUTTON */}
             <AnimatePresence>
               {isHeroSection && (
                 <motion.a
@@ -109,11 +112,12 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.4 }}
-            className="absolute top-full left-4 right-4 mt-2 p-4 premium-glass rounded-3xl shadow-2xl md:hidden overflow-hidden"
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.3 }}
+            // CHANGES HERE: 'top-full left-0 right-0 mt-0' kiya taake gaps khatam hon aur neechay ka text hide ho jaye
+            className="absolute top-full left-0 right-0 mt-0 p-6 bg-bg-primary border-b border-premium shadow-2xl md:hidden overflow-hidden"
           >
             <div className="flex flex-col gap-3 p-4 rounded-2xl bg-bg-secondary/40">
               {navLinks.map((link, idx) => (
@@ -130,7 +134,7 @@ export default function Navbar() {
                 </motion.a>
               ))}
 
-              {/* MOBILE RESUME BUTTON (Sirf tab dikhega jab drawer open ho aur user Hero section par ho) */}
+              {/* MOBILE RESUME BUTTON */}
               <AnimatePresence>
                 {isHeroSection && (
                   <motion.a
