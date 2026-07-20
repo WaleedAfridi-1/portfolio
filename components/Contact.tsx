@@ -20,7 +20,7 @@ export default function Contact() {
     if (result?.error) {
       setStatus({ error: result.error });
     } else {
-      setIsSubmitted(true); // Is se niche form hide ho jaye ga aur thank you screen ajaye gi
+      setIsSubmitted(true); 
     }
   };
 
@@ -68,7 +68,7 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* Dynamic Form Engine OR Thank You Wrapper */}
+        {/* Thank You Wrapper */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -78,7 +78,7 @@ export default function Contact() {
         >
           <AnimatePresence mode="wait">
             {!isSubmitted ? (
-              // FORM INTERFACE
+              // FORM
               <motion.form
                 key="contact-form"
                 initial={{ opacity: 0 }}
@@ -97,10 +97,20 @@ export default function Contact() {
                     <input name="email" required type="email" className="w-full bg-bg-secondary border border-premium rounded-xl px-4 py-3.5 text-sm text-text-main focus:outline-none focus:border-accent-cyan/40 focus:ring-1 focus:ring-accent-cyan/20 transition-all font-medium" placeholder="e.g. name@domain.com" />
                   </div>
                 </div>
+                
                 <div className="space-y-2">
-                  <label className="text-[10px] font-bold font-mono text-text-muted/70 tracking-wider uppercase">Message</label>
-                  <textarea name="message" required rows={5} className="w-full bg-bg-secondary border border-premium rounded-xl px-4 py-3.5 text-sm text-text-main focus:outline-none focus:border-accent-cyan/40 focus:ring-1 focus:ring-accent-cyan/20 transition-all font-medium resize-none" placeholder="Detail your infrastructure or dataset requirements..." />
-                </div>
+                  <label className="text-[10px] font-bold font-mono text-text-muted/70 tracking-wider uppercase">
+                    Message
+                  </label>
+                
+                  <textarea
+                    name="message"
+                    required
+                    rows={5}
+                    className="w-full bg-bg-secondary border border-premium rounded-xl px-4 py-3.5 text-sm text-text-main focus:outline-none focus:border-accent-cyan/40 focus:ring-1 focus:ring-accent-cyan/20 transition-all font-medium resize-none"
+                    placeholder="Tell me about your project, idea, or how I can help..."
+                  />
+              </div>
 
                 {status?.error && (
                   <p className="text-rose-400 text-xs font-mono">⚠  Error: {status.error}</p>
@@ -119,7 +129,7 @@ export default function Contact() {
                 </button>
               </motion.form>
             ) : (
-              // PRE-STAGE: THANK YOU INTERFACE
+              // THANK YOU 
               <motion.div
                 key="success-screen"
                 initial={{ opacity: 0, scale: 0.95 }}
